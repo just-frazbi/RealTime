@@ -1,0 +1,28 @@
+name: RealTime
+version: a1.0
+main: com.frazbi.realTime.RealTime
+api-version: 1.20
+author: frazbik
+description: Синхронизирует игровое время с реальным временем
+website: https://github.com/frazbi/RealTime
+
+commands:
+  realtime:
+    description: Управление плагином RealTime
+    usage: /realtime <enable|disable|reload|status>
+    aliases: [rt, rtime]
+    permission: realtime.use
+
+permissions:
+  realtime.use:
+    description: Позволяет использовать основные команды
+    default: true
+  realtime.status:
+    description: Позволяет просматривать статус плагина
+    default: true
+  realtime.admin:
+    description: Полный доступ к управлению плагином
+    default: op
+    children:
+      realtime.use: true
+      realtime.status: true
