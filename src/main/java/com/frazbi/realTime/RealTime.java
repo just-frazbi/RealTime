@@ -12,20 +12,16 @@ public class RealTime extends JavaPlugin {
     
     private BukkitRunnable timeTask;
     private boolean syncEnabled = true;
-    private int updateInterval = 20; // Обновление каждую секунду (20 тиков)
+    private int updateInterval = 20;
     
     @Override
     public void onEnable() {
-        // Сохраняем конфиг по умолчанию
         saveDefaultConfig();
-        
-        // Загружаем настройки
+
         loadConfig();
-        
-        // Регистрируем команду
+
         getCommand("realtime").setExecutor(new RealTimeCommand(this));
-        
-        // Запускаем синхронизацию времени
+
         if (syncEnabled) {
             startTimeSync();
         }
@@ -73,10 +69,7 @@ public class RealTime extends JavaPlugin {
     
     private void syncTime() {
         LocalTime realTime = LocalTime.now();
-        
-        // Конвертируем реальное время в Minecraft время
-        // В Minecraft: 0 тиков = 6:00, 6000 тиков = 12:00, 12000 тиков = 18:00, 18000 тиков = 00:00
-        // Формула: (часы - 6) * 1000 + минуты * 16.67
+
         int hours = realTime.getHour();
         int minutes = realTime.getMinute();
         
@@ -84,8 +77,7 @@ public class RealTime extends JavaPlugin {
         if (minecraftTime < 0) {
             minecraftTime += 24000;
         }
-        
-        // Применяем время ко всем мирам
+
         for (World world : Bukkit.getWorlds()) {
             if (getConfig().getStringList("enabled-worlds").isEmpty() || 
                 getConfig().getStringList("enabled-worlds").contains(world.getName())) {

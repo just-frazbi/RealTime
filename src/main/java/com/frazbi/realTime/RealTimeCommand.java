@@ -92,8 +92,7 @@ public class RealTimeCommand implements CommandExecutor, TabCompleter {
             completions.add("disable");
             completions.add("reload");
             completions.add("status");
-            
-            // Фильтруем по введённому тексту
+
             String input = args[0].toLowerCase();
             completions.removeIf(s -> !s.toLowerCase().startsWith(input));
         }
